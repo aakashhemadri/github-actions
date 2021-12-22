@@ -14,8 +14,10 @@ jobs:
       - name: Install pandoc
         run: sudo apt-get install pandoc texlive-latex-extra texlive-fonts-recommended lmodern
       
-      - name: Build pdf
+      - name: Create output directory
         run: mkdir -p output
+
+      - name: Building pdf with pandoc
         run: pandoc README.md --output output/README.pdf
 
       - uses: actions/upload-artifact@v2
