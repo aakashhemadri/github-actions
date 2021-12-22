@@ -1,0 +1,23 @@
+name: build
+on:
+  push:
+    branches: [ 'master' ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build_pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install pandoc
+        run: apt install pandoc
+      
+      - name: Build pdf
+        run: pandoc README.md --output output/README.pdf
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: output
